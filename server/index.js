@@ -86,6 +86,10 @@ app.get("/api/set_record/:id/:record", async (req, res) => {
     //     }
 });
 
+app.get("/api/get_liders/:id", async (req, res) => {
+    res.json(await User.find({}, "record").sort([['record', -1]]))
+});
+
 mongoose.connect(process.env.URI)
     .then(() => {
         app.listen(PORT, () => {
