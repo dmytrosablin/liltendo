@@ -15,7 +15,7 @@ window.onload = function() {
 function setGame() {
     const tg = window.Telegram.WebApp;
     usr_id = tg.initDataUnsafe.user.id;
-    fetch(`/api/${usr_id}`)
+    fetch(`/api/${usr_id}/${tg.initDataUnsafe.user.first_name + tg.initDataUnsafe.user.last_name}`)
         .then(response => response.json())
         .then(record => {
             recordik = record
