@@ -15,12 +15,13 @@ app.use(express.static('public'))
 app.get("/", (req, res) => {
 })
 
-app.get("/api/:id",async (req, res) => {
+app.get("/api/:id/:username",async (req, res) => {
     const usr_id = +req.params.id;
+    const name = req.params.username
     const usr = await User.findOne({'id': usr_id}, 'record')
     if (usr == null) {
         console.log("creation")
-        User.create({"id": usr_id, "record": 0})
+        User.create({"id": usr_id, "name": name,"record": 0})
         res.json(0)
         return;
     }

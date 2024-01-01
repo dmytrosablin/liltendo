@@ -7,6 +7,10 @@ const userSchema = new Schema({
         type: Number,
         required: true
     },
+    name: {
+        type: String,
+        required: true
+    },
     record: {
         type: Number,
         required: true
