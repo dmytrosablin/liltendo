@@ -1,0 +1,13 @@
+body {
+    font-family:'Courier New', Courier, monospace;
+    background-color: goldenrod;
+    height: 100%;
+    margin: 0;
+}
+
+#board {
+    background-image: url("./flappybirdbg.png");
+    background-size: cover;
+     /*background-color: skyblue;*/
+    /*background-image: url("./flappybirdbg.png");*/
+}
