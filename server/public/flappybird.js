@@ -49,7 +49,7 @@ startBtn.id = 'start';
 startBtn.src = './start.png';
 startBtn.width = 200;
 startBtn.height = 100;
-startBtn.style.marginTop = `${boardHeight / 4 * 3 - 50}px`;
+startBtn.style.marginTop = `${boardHeight / 6 * 5 - 50}px`;
 startBtn.style.borderRadius = "10px";
 startBtn.style.left = `${boardWidth / 2 - 100}px`;
 
@@ -60,7 +60,7 @@ welcomeImg.src = "./logo.png";
 welcomeImg.width = 400;
 welcomeImg.height = 200;
 welcomeImg.style.marginTop = `100px`;
-welcomeImg.style.left = `${window.innerWidth/2 - 210}px`
+welcomeImg.style.left = `${window.innerWidth/2 - 200}px`
 
 function addRestart() {
     document.removeEventListener("click", moveBird)
