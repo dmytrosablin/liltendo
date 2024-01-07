@@ -12,8 +12,8 @@ let boardHeight = window.innerHeight;
 let context;
 
 //bird
-let birdWidth = 50; //width/height ratio = 408/228 = 17/12
-let birdHeight = 50;
+let birdWidth = 34; //width/height ratio = 408/228 = 17/12
+let birdHeight = 34;
 let birdX = boardWidth/8;
 let birdY = boardHeight/2;
 let birdImg;
@@ -43,7 +43,46 @@ let gravity = 0.4;
 let gameOver = false;
 let score = 0;
 
-window.onload = function() {
+//start button
+let startBtn = document.createElement("img");
+startBtn.id = 'start';
+startBtn.src = './start.png';
+startBtn.width = 200;
+startBtn.height = 100;
+startBtn.style.marginTop = `${boardHeight / 4 * 3 - 50}px`;
+startBtn.style.borderRadius = "10px";
+startBtn.style.left = `${boardWidth / 2 - 100}px`;
+
+//logo
+let welcomeImg = document.createElement("img");
+welcomeImg.id = "logo";
+welcomeImg.src = "./logo.png";
+welcomeImg.width = 400;
+welcomeImg.height = 200;
+welcomeImg.style.marginTop = `100px`;
+welcomeImg.style.left = `${window.innerWidth/2 - 210}px`
+
+function addRestart() {
+    document.removeEventListener("click", moveBird)
+
+
+    let restartBtn = document.createElement("img");
+    restartBtn.id = 'restart';
+    restartBtn.src = './restart.png';
+    restartBtn.width = 250;
+    restartBtn.height = 100;
+    restartBtn.style.marginTop = `${boardHeight / 4 * 3 - 50}px`;
+    restartBtn.style.left = `${boardWidth / 2 - 125}px`;
+    restartBtn.style.borderRadius = "10px"
+    restartBtn.addEventListener("click", () => {
+        document.body.removeChild(restartBtn)
+        document.addEventListener("click", moveBird);
+
+    })
+    document.body.appendChild(restartBtn);
+}
+
+function start() {
     const tg = window.Telegram.WebApp;
     usr_id = tg.initDataUnsafe.user.id;
     fetch(`/api/${usr_id}/${tg.initDataUnsafe.user.first_name + tg.initDataUnsafe.user.last_name}`)
@@ -52,17 +91,17 @@ window.onload = function() {
             recordik = record
         });
 
-    board = document.getElementById("board");
+    board = document.createElement("canvas");
+    board.id = "board";
     board.height = boardHeight;
     board.width = boardWidth;
-    console.log(board.width)
-    context = board.getContext("2d"); //used for drawing on the board
 
-    //draw flappy bird
-    // context.fillStyle = "green";
-    // context.fillRect(bird.x, bird.y, bird.width, bird.height);
+    document.body.appendChild(board);
+    document.body.removeChild(startBtn);
+    document.body.removeChild(welcomeImg);
 
-    //load images
+    context = board.getContext("2d");
+
     birdImg = new Image();
     birdImg.src = "./ton.png";
     birdImg.onload = function() {
@@ -82,6 +121,16 @@ window.onload = function() {
         e.preventDefault()
         e.stopPropagation()
     });
+}
+
+
+window.onload = function() {
+    document.body.appendChild(startBtn);
+    document.body.appendChild(welcomeImg);
+
+    startBtn.addEventListener("click", () => {
+        start();
+    })
 }
 
 function update() {
@@ -129,6 +178,8 @@ function update() {
 
     if (gameOver) {
         context.fillText("GAME OVER", 5, 90);
+        addRestart();
+
         if (score > recordik) {
             let url;
             fetch(`/api/set_record/${usr_id}/${score}`);
