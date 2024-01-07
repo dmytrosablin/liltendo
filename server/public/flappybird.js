@@ -60,7 +60,7 @@ welcomeImg.src = "./logo.png";
 welcomeImg.width = window.innerWidth-20;
 welcomeImg.height = 200;
 welcomeImg.style.marginTop = `100px`;
-welcomeImg.style.left = `${window.innerWidth/2 - 200}px`
+welcomeImg.style.left = `${window.innerWidth/2 - welcomeImg.width/2}px`
 
 function addRestart() {
     document.removeEventListener("click", moveBird)
