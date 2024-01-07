@@ -57,7 +57,7 @@ startBtn.style.left = `${boardWidth / 2 - 100}px`;
 let welcomeImg = document.createElement("img");
 welcomeImg.id = "logo";
 welcomeImg.src = "./logo.png";
-welcomeImg.width = 400;
+welcomeImg.width = window.innerWidth-20;
 welcomeImg.height = 200;
 welcomeImg.style.marginTop = `100px`;
 welcomeImg.style.left = `${window.innerWidth/2 - 200}px`
@@ -71,7 +71,7 @@ function addRestart() {
     restartBtn.src = './restart.png';
     restartBtn.width = 250;
     restartBtn.height = 100;
-    restartBtn.style.marginTop = `${boardHeight / 4 * 3 - 50}px`;
+    restartBtn.style.marginTop = `${boardHeight / 6 * 5 - 50}px`;
     restartBtn.style.left = `${boardWidth / 2 - 125}px`;
     restartBtn.style.borderRadius = "10px"
     restartBtn.addEventListener("click", () => {
