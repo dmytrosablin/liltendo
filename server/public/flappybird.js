@@ -181,6 +181,7 @@ function update() {
         addRestart();
 
         if (score > recordik) {
+            recordik = score;
             let url;
             fetch(`/api/set_record/${usr_id}/${score}`);
 
