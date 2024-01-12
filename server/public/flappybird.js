@@ -13,7 +13,7 @@ let context;
 
 //bird
 let birdWidth = 34; //width/height ratio = 408/228 = 17/12
-let birdHeight = 34;
+let birdHeight = 24;
 let birdX = boardWidth/8;
 let birdY = boardHeight/2;
 let birdImg;
@@ -56,7 +56,7 @@ startBtn.style.left = `${boardWidth / 2 - 100}px`;
 //logo
 let welcomeImg = document.createElement("img");
 welcomeImg.id = "logo";
-welcomeImg.src = "./logo.png";
+welcomeImg.src = "./logo1.png";
 welcomeImg.width = window.innerWidth-20;
 welcomeImg.height = 200;
 welcomeImg.style.marginTop = `100px`;
@@ -103,7 +103,7 @@ function start() {
     context = board.getContext("2d");
 
     birdImg = new Image();
-    birdImg.src = "./ton.png";
+    birdImg.src = "./flappybird.png";
     birdImg.onload = function() {
         context.drawImage(birdImg, bird.x, bird.y, bird.width, bird.height);
     }
