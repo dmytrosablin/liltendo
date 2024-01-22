@@ -17,12 +17,14 @@ body, html{
 }
 #user_name {
     margin-left: 15px;
+    font-weight: bold;
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: larger;
     color: white;
 }
 
 #usrRec {
+    font-weight: bold;
     width: 50px;
     /*margin-left: auto;*/
     /*height: 50px;*/
