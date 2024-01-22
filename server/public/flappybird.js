@@ -72,12 +72,13 @@ leaders_list_btn.style.borderRadius = "10px";
 let welcomeImg = document.createElement("img");
 welcomeImg.id = "logo";
 welcomeImg.src = "./logo1.png";
-welcomeImg.width = window.innerWidth-20;
+welcomeImg.width = window.innerWidth - 20;
 welcomeImg.height = 200;
 welcomeImg.style.marginTop = `100px`;
 welcomeImg.style.left = `${window.innerWidth/2 - welcomeImg.width/2}px`
 
 async function show_list() {
+    console.log(window.innerWidth)
     if (show == false) {
         show = true;
         let liders;
@@ -88,11 +89,14 @@ async function show_list() {
             })
 
         listik = document.createElement("div");
+        listik.style.width = `${window.innerWidth - 40}px`;
+
         listik.id = "listik"
         listik.style.top = "0px"
-        listik.style.left = `${boardWidth / 2 - 200}px`;
-        listik.style.marginTop = `10px`
+        listik.style.left = `${boardWidth / 2 - window.innerWidth /2 + 20}px`;
+        listik.style.marginTop = `15px`
         listik.style.height = `${boardHeight / 6 * 5 - 100}px`;
+        console.log(listik.style.width)
 
         let listik_logo = document.createElement("div");
         listik_logo.id = "listikLogo";
