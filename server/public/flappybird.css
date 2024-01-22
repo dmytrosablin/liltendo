@@ -17,7 +17,7 @@ body, html{
 }
 #user_name {
     margin-left: 15px;
-    font-family: cursive;
+    font-family: "Lucida Console", "Courier New", monospace;
     font-size: larger;
     color: white;
 }
@@ -37,7 +37,8 @@ body, html{
 
 #listikLogo {
     margin: auto;
-    font-family: cursive;
+    font-weight: bold;
+    font-family: "Lucida Console", "Courier New", monospace;
     font-size: xx-large;
     text-align: center;
     border-bottom: firebrick 1px solid;
