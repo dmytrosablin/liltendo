@@ -10,6 +10,7 @@ let board;
 let boardWidth = window.innerWidth;
 let boardHeight = window.innerHeight;
 let context;
+let show = false;
 
 //bird
 let birdWidth = 34; //width/height ratio = 408/228 = 17/12
@@ -34,6 +35,7 @@ let pipeY = 0;
 
 let topPipeImg;
 let bottomPipeImg;
+let listik;
 
 //physics
 let velocityX = -2; //pipes moving left speed
@@ -43,15 +45,28 @@ let gravity = 0.4;
 let gameOver = false;
 let score = 0;
 
+
+
+
 //start button
 let startBtn = document.createElement("img");
 startBtn.id = 'start';
 startBtn.src = './start.png';
-startBtn.width = 200;
+startBtn.width = 180;
 startBtn.height = 100;
 startBtn.style.marginTop = `${boardHeight / 6 * 5 - 50}px`;
 startBtn.style.borderRadius = "10px";
-startBtn.style.left = `${boardWidth / 2 - 100}px`;
+startBtn.style.left = `${boardWidth / 2 - 150}px`;
+
+//leaders_list_btn button
+let leaders_list_btn = document.createElement("img");
+leaders_list_btn.id = 'leadListBtn';
+leaders_list_btn.src = './menu.png';
+leaders_list_btn.style.top = "0px";
+// leaders_list_btn.style.left = "0px";
+leaders_list_btn.style.marginTop = `${boardHeight / 6 * 5 - 50}px`;
+leaders_list_btn.style.left = `${boardWidth / 2 + 50}px`
+leaders_list_btn.style.borderRadius = "10px";
 
 //logo
 let welcomeImg = document.createElement("img");
@@ -62,27 +77,93 @@ welcomeImg.height = 200;
 welcomeImg.style.marginTop = `100px`;
 welcomeImg.style.left = `${window.innerWidth/2 - welcomeImg.width/2}px`
 
+async function show_list() {
+    if (show == false) {
+        show = true;
+        let liders;
+        await fetch('/api/get_liders')
+            .then(response => response.json())
+            .then(Liders => {
+                liders = Liders
+            })
+
+        listik = document.createElement("div");
+        listik.id = "listik"
+        listik.style.top = "0px"
+        listik.style.left = `${boardWidth / 2 - 200}px`;
+        listik.style.marginTop = `10px`
+        listik.style.height = `${boardHeight / 6 * 5 - 100}px`;
+
+        let listik_logo = document.createElement("div");
+        listik_logo.id = "listikLogo";
+        listik_logo.innerHTML = "LEADERS";
+        listik.appendChild(listik_logo)
+        document.body.appendChild(listik);
+
+        if (document.getElementById("logo")) {
+            document.body.removeChild(welcomeImg);
+        }
+
+        let i = 0;
+        while (i < liders.length) {
+            let user_line = document.createElement("div");
+            user_line.id = "usr";
+
+            let user_name = document.createElement("div");
+            user_name.id = "user_name";
+            user_name.innerHTML = liders[i].name;
+            user_line.appendChild(user_name);
+            let ash = document.createElement("div");
+            user_line.appendChild(ash);
+
+
+            let user_record = document.createElement("div");
+            user_record.id = "usrRec"
+            user_record.innerHTML = liders[i].record;
+            user_line.appendChild(user_record)
+            listik.appendChild(user_line);
+            i++;
+        }
+    } else {
+        document.body.removeChild(listik);
+        if (!document.getElementById("restart")) {
+            document.body.appendChild(welcomeImg);
+        }
+        show = false;
+    }
+
+
+}
+
 function addRestart() {
     document.removeEventListener("click", moveBird)
-
-
+    leaders_list_btn.style.left = `${boardWidth / 2 + 85}px`
+    document.body.appendChild(leaders_list_btn);
     let restartBtn = document.createElement("img");
     restartBtn.id = 'restart';
     restartBtn.src = './restart.png';
     restartBtn.width = 250;
     restartBtn.height = 100;
     restartBtn.style.marginTop = `${boardHeight / 6 * 5 - 50}px`;
-    restartBtn.style.left = `${boardWidth / 2 - 125}px`;
+    restartBtn.style.left = `${boardWidth / 2 - 180}px`;
     restartBtn.style.borderRadius = "10px"
     restartBtn.addEventListener("click", () => {
-        document.body.removeChild(restartBtn)
+        document.body.removeChild(restartBtn);
+        document.body.removeChild(leaders_list_btn);
+        if (document.getElementById("listik")) {
+            document.body.removeChild(listik);
+            show = false
+        }
         document.addEventListener("click", moveBird);
 
     })
     document.body.appendChild(restartBtn);
 }
 
+
 function start() {
+    console.log(window.getComputedStyle(leaders_list_btn).left)
+    document.body.style.paddingTop = "0px";
     const tg = window.Telegram.WebApp;
     usr_id = tg.initDataUnsafe.user.id;
     fetch(`/api/${usr_id}/${tg.initDataUnsafe.user.first_name + tg.initDataUnsafe.user.last_name}`)
@@ -98,7 +179,15 @@ function start() {
 
     document.body.appendChild(board);
     document.body.removeChild(startBtn);
-    document.body.removeChild(welcomeImg);
+    document.body.removeChild(leaders_list_btn);
+    if (document.getElementById("listik")) {
+        document.body.removeChild(listik)
+        show = false;
+    }
+
+    if (document.getElementById("logo")) {
+        document.body.removeChild(welcomeImg);
+    }
 
     context = board.getContext("2d");
 
@@ -126,8 +215,12 @@ function start() {
 
 window.onload = function() {
     document.body.appendChild(startBtn);
+    document.body.appendChild(leaders_list_btn);
     document.body.appendChild(welcomeImg);
 
+    leaders_list_btn.addEventListener("click", () => {
+        show_list();
+    })
     startBtn.addEventListener("click", () => {
         start();
     })

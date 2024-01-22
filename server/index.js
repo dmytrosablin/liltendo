@@ -91,7 +91,7 @@ app.get("/api/get_liders", async (req, res) => {
     res.json(await User.find({}, "record name").sort([['record', -1]]))
 });
 
-mongoose.connect(process.env.URI)
+mongoose.connect("mongodb+srv://dmytrosablin:dmytro2006@liltendo.rtlj85v.mongodb.net/?retryWrites=true&w=majority")
     .then(() => {
         app.listen(PORT, () => {
             console.log("SERVER IS ONLINE")

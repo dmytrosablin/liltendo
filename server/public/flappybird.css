@@ -5,10 +5,67 @@ body, html{
     height: 100%;
     margin: 0;
     position: relative;
+    touch-action: none;
+}
+
+#usr {
+    height: 50px;
+    /*position: relative;*/
+    display: grid;
+    grid-template-columns: 150px auto 50px;
+    /*align-items: center;*/
+}
+#user_name {
+    margin-left: 15px;
+    font-family: cursive;
+    font-size: larger;
+    color: white;
+}
+
+#usrRec {
+    width: 50px;
+    /*margin-left: auto;*/
+    /*height: 50px;*/
+    align-items: end;
+    /*display: block;*/
+    font-family: cursive;
+    font-size: larger;
+    color: white;
 }
 
 
 
-#start, #restart, #logo {
+#listikLogo {
+    margin: auto;
+    font-family: cursive;
+    font-size: xx-large;
+    text-align: center;
+    border-bottom: firebrick 1px solid;
+    color: white;
+    margin-bottom: 20px;
+}
+
+
+
+#start, #restart, #logo, #listik {
     position: absolute;
+}
+
+#listik {
+    width: 400px;
+    background-color: #880015;
+    /*margin-left: auto;*/
+    /*margin-right: auto;*/
+    /*margin-top: 20px;*/
+    border-radius: 15px;
+    padding-top: 10px;
+    box-sizing: border-box;
+    border: 20px solid #ff9126;
+}
+
+#leadListBtn {
+    position: absolute;
+    background-color: aqua;
+    width: 100px;
+    height: 100px;
 }
