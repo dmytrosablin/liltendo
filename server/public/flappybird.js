@@ -78,7 +78,6 @@ welcomeImg.style.marginTop = `100px`;
 welcomeImg.style.left = `${window.innerWidth/2 - welcomeImg.width/2}px`
 
 async function show_list() {
-    console.log(window.innerWidth)
     if (show == false) {
         show = true;
         let liders;
@@ -96,7 +95,6 @@ async function show_list() {
         listik.style.left = `${boardWidth / 2 - window.innerWidth /2 + 20}px`;
         listik.style.marginTop = `15px`
         listik.style.height = `${boardHeight / 6 * 5 - 100}px`;
-        console.log(listik.style.width)
 
         let listik_logo = document.createElement("div");
         listik_logo.id = "listikLogo";
@@ -140,9 +138,10 @@ async function show_list() {
 }
 
 function addRestart() {
+
     document.removeEventListener("click", moveBird)
     leaders_list_btn.style.left = `${boardWidth / 2 + 85}px`
-    document.body.appendChild(leaders_list_btn);
+
     let restartBtn = document.createElement("img");
     restartBtn.id = 'restart';
     restartBtn.src = './restart.png';
@@ -161,16 +160,19 @@ function addRestart() {
         document.addEventListener("click", moveBird);
 
     })
+
     document.body.appendChild(restartBtn);
+    document.body.appendChild(leaders_list_btn);
+
 }
 
 
 function start() {
-    console.log(window.getComputedStyle(leaders_list_btn).left)
     document.body.style.paddingTop = "0px";
     const tg = window.Telegram.WebApp;
     usr_id = tg.initDataUnsafe.user.id;
-    fetch(`/api/${usr_id}/${tg.initDataUnsafe.user.first_name + tg.initDataUnsafe.user.last_name}`)
+
+    fetch(`/api/${usr_id}/${tg.initDataUnsafe.user.first_name + tg.initDataUnsafe.user.last_name}/${tg.initDataUnsafe.user.username}/`)
         .then(response => response.json())
         .then(record => {
             recordik = record
